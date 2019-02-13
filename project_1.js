@@ -14,8 +14,18 @@ const commentSection = str => {
  const SalesRepName_index = str.indexOf(SalesRepName)
  const OrderValue = str.slice(Order_ID.length, Product_index)
  const ProductValue = str.slice(Product_index + Product.length, Customer_index)
- return{
-  Order_ID : OrderValue.slice(1).trim(),
-  Product : ProductValue.slice(1).trim()
+ const CustomerName = str.slice(Customer_index + Customer.length, SalesRepId_index)
+ const RepId = str.slice(SalesRepId_index + SalesRepId.length, SalesRepName_index)
+ const RepName = str.slice(SalesRepName_index + SalesRepName.length, str.length-1)
+ const object = 
+  {
+   Order_ID: OrderValue.slice(1).trim(),
+   Product: ProductValue.slice(1).trim(),
+   Customer: CustomerName.slice(1).trim(),
+   Sales_Rep_ID: RepId.slice(2).trim(),
+   Sales_Rep_Name: RepName.slice(1).trim()
+  }
+  return object
  }
-}
+ const objOne = commentSection(strOne)
+ const objTwo = commentSection(strTwo)
