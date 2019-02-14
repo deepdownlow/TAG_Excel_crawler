@@ -1,0 +1,16 @@
+{
+  "name": "tag_extraction_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "csvProcessor.js",
+  "scripts": {
+    "start": "nodemon csvProcessor.js"
+  },
+  "keywords": [],
+  "author": "Sina Keshmiri - Senior Full Stack Developer (The Acqusition Group)",
+  "license": "ISC",
+  "dependencies": {
+    "csvtojson": "^2.0.8",
+    "json2csv": "^4.3.4"
+  }
+}
