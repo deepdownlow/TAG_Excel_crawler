@@ -7,7 +7,7 @@ const csv = require('csvtojson')
 const JSON_file = []
 
 //Convert and Process cvs files
-const FileProcess = () => {
+const FifaProcess = () => {
     const fileName = fs.readdirSync('./csv_drop_off')[1]
     const csvFilePath = `./csv_drop_off/${fileName}`
     csv()
@@ -59,8 +59,8 @@ const JsonToCsv = json => {
 const FilteredByRepId = json => {
    const repId = readLine.question(`Please Enter Rep's Id: `)
    let repSale = json.filter(x => x["SALES_REP_ID"] === 'DMG8')
-   WriteToFile(repSale, null,'./FIFA_REP_Report',repId)  
-  }
+   WriteToFile(repSale, null, './FIFA_REP_Report', repId)
+}
 
 //write to file function
 const WriteToFile = (file, getPath, setPath, id) => {
@@ -83,25 +83,32 @@ const WriteToFile = (file, getPath, setPath, id) => {
    const csv = json2csvParser.parse(file)
    let fileName = getPath !== null ? fs.readdirSync(getPath)[1] : `REP_ID_${id.toUpperCase()}.csv`
    fs.writeFile(`./${ setPath }/Modified_${ fileName }`, csv, err => {
-      if (err) return console.log(err)
-      return init()
+      if (err) console.log(err)
    })
+   return init()
 }
 //init
 const init = () => {
    if(!JSON_file.length) 
     {
-      console.log(`There is no file in the buffer`)
-      return
+      console.log(`Number of File in The BUFFER: ${ JSON_file.length }`)
+      console.log(`Please note that you will not be able to use ID extraction if the BUFFER is empty`)
+      console.log('1. Process DOMO File')
+      console.log('2. Process FIFA File')
+      const choose = readLine.question('Please choose from the menu: ')
+      if (choose.toUpperCase() === 'DOMO') 
+       {
+         return ProcessDomo()
+       }
+      if (choose.toUpperCase() === 'FIFA') 
+       {
+         return FifaProcess()
+       }
     }
-   console.log('1. Process FIFA File (FIFA)')
-   console.log('2. Extract Transaction By Id (ID)')
-   const choose = readLine.question('Please choose from the menu: ')
-   if(choose.toUpperCase() === 'FIFA') {
-      return FileProcess()
-   }
-   if(choose.toUpperCase() === 'ID') {
-      return FilteredByRepId(JSON_file)
-   }
+   // console.log('3. Extract Transaction By ID')
+   
+   // if(choose.toUpperCase() === 'ID') {
+   //    return FilteredByRepId(JSON_file)
+   // }
 }
 init()
