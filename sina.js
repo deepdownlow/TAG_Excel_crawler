@@ -14,16 +14,16 @@ const DomoStatus = () => {
                const outletId = readLine.question(`Please Enter Outlet ID Number: \n`)
                const outletInDomo = domoJson.filter(x => (x["NCCS_CHANNEL_OUTLET_ID"] === outletId))
                const outletInFIfa = fifaJson.filter(x => (x["OUTLET_ID"] === outletId))
-               // if (!outletInDomo.length || !outletInFIfa.length) {
-               //    console.log(`Outlet ID you are looking for doesn't exist on DOMO\n`)
-               //    return setTimeout(() => {
-               //       const question = readLine.question(`Would you like to look up for another outlet ID? (y/n)`)
-               //       if (question.toLocaleLowerCase() === 'y') return setTimeout(() => DomoStatus(), 500)
-               //       setTimeout(() => init(), 1000)
-               //    }, 2000)
-               // }
-               // setTimeout(() => console.log(`Number Of occurance on DOMO: ${outletInDomo.length}`), 1000)
-               // setTimeout(() => console.log(`Number Of Occurance on FIFA: ${outletInFIfa.length}`), 3000)               
+               if (!outletInDomo.length || !outletInFIfa.length) {
+                  console.log(`Outlet ID you are looking for doesn't exist on DOMO\n`)
+                  return setTimeout(() => {
+                     const question = readLine.question(`Would you like to look up for another outlet ID? (y/n)`)
+                     if (question.toLocaleLowerCase() === 'y') return setTimeout(() => DomoStatus(), 500)
+                     setTimeout(() => init(), 1000)
+                  }, 2000)
+               }
+               setTimeout(() => console.log(`Number Of occurance on DOMO: ${outletInDomo.length}`), 1000)
+               setTimeout(() => console.log(`Number Of Occurance on FIFA: ${outletInFIfa.length}`), 3000)               
                const fields =
                   [
                      'OUTLET_ID',
